@@ -16,4 +16,4 @@ const veggies = [
   },
 ];
 
-module.exports = veggies
+module.exports = veggies;

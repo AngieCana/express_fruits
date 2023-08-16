@@ -1,10 +1,21 @@
 const express = require("express");
 const jsxViewEngine = require("jsx-view-engine");
-const fruits = require("./components/fruits")
-const veggies = require("./components/veggies")
+const fruits = require("./components/fruits");
+const veggies = require("./components/veggies");
+const dotenv = require("dotenv").config;
+const mongoose = require("mongoose");
 const app = express();
+
 app.set("view engine", "jsx");
 app.engine("jsx", jsxViewEngine());
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+mongoose.connection.once("open", () => {
+  console.log("connected to mongo");
+});
 
 // Define middleware
 app.use((req, res, next) => {
